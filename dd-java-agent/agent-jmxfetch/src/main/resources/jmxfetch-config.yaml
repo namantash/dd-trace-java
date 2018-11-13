@@ -4,4 +4,92 @@ init_config:
 instances:
 - jmx_url: service:jmx:local:///
   conf:
-    # Intentionally left empty for now
+    # Classloading
+    - include:
+        domain: java.lang
+        type: ClassLoading
+        attribute:
+          LoadedClassCount:
+            alias: jvm.loaded_classes
+            metric_type: gauge
+    # GC Memory Pools
+    - include:
+        domain: java.lang
+        type: MemoryPool
+        name: PS Eden Space
+        attribute:
+          Usage.used:
+            alias: jvm.gc.eden_size
+            metric_type: gauge
+    - include:
+        domain: java.lang
+        type: MemoryPool
+        name: Par Eden Space
+        attribute:
+          Usage.used:
+            alias: jvm.gc.eden_size
+            metric_type: gauge
+    - include:
+        domain: java.lang
+        type: MemoryPool
+        name: G1 Eden Space
+        attribute:
+          Usage.used:
+            alias: jvm.gc.eden_size
+            metric_type: gauge
+    - include:
+        domain: java.lang
+        type: MemoryPool
+        name: PS Survivor Space
+        attribute:
+          Usage.used:
+            alias: jvm.gc.survivor_size
+            metric_type: gauge
+    - include:
+        domain: java.lang
+        type: MemoryPool
+        name: Par Survivor Space
+        attribute:
+          Usage.used:
+            alias: jvm.gc.survivor_size
+            metric_type: gauge
+    - include:
+        domain: java.lang
+        type: MemoryPool
+        name: G1 Survivor Space
+        attribute:
+          Usage.used:
+            alias: jvm.gc.survivor_size
+            metric_type: gauge
+    - include:
+        domain: java.lang
+        type: MemoryPool
+        name: PS Old Gen
+        attribute:
+          Usage.used:
+            alias: jvm.gc.old_gen_size
+            metric_type: gauge
+    - include:
+        domain: java.lang
+        type: MemoryPool
+        name: CMS Old Gen
+        attribute:
+          Usage.used:
+            alias: jvm.gc.old_gen_size
+            metric_type: gauge
+    - include:
+        domain: java.lang
+        type: MemoryPool
+        name: G1 Old Gen
+        attribute:
+          Usage.used:
+            alias: jvm.gc.old_gen_size
+            metric_type: gauge
+    # Open File Descriptors
+    - include:
+        domain: java.lang
+        type: OperatingSystem
+        attribute:
+          OpenFileDescriptorCount:
+            alias: jvm.os.open_file_descriptors
+            metric_type: gauge
