@@ -31,10 +31,6 @@ class JettyHandlerTest extends AgentTestRunner {
     server.stop()
   }
 
-  @Override
-  void afterTest() {
-  }
-
   def "call to jetty creates a trace"() {
     setup:
     Handler handler = new AbstractHandler() {
